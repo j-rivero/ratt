@@ -55,6 +55,10 @@ var (
 		false,
 		"Rebuild without new changes to check if the failures are really related")
 
+	extraSrcPackages = flag.String("extra_src_packages",
+	        "",
+		"Coma separated list of extra source packages to inject into ratt manually")
+
 	listsPrefixRe = regexp.MustCompile(`/([^/]*_dists_.*)_InRelease$`)
 )
 
@@ -128,7 +132,7 @@ func reverseBuildDeps(packagesPaths, sourcesPaths []string, binaries []string) (
 	arch := strings.TrimSpace(string(archOut))
 
 	// TODO: Cache this output based on the .changes file. dose-ceve takes quite a while.
-	log.Printf("CMD EXEC: dose-ceve" + "--verbose" + "--deb-native-arch=" + arch + "-T" + "debsrc" +"-r" + strings.Join(binaries, ",") + "-G" + "pkg")
+	log.Printf("DOSE-CEVE EXEC: dose-ceve " + "--verbose " + "--deb-native-arch=" + arch + " -T" + "debsrc" +" -r" + strings.Join(binaries, ",") + " -G" + "pkg")
 
 	ceve := exec.Command(
 		"dose-ceve",
@@ -308,6 +312,8 @@ func main() {
 	if err := os.MkdirAll(*logDir, 0755); err != nil {
 		log.Fatal(err)
 	}
+
+	log.Printf("DEBUG :: debs " + debs + " :: src " + src)
 
 	builder := &sbuild{
 		dist:      *sbuildDist,
