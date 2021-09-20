@@ -128,8 +128,11 @@ func reverseBuildDeps(packagesPaths, sourcesPaths []string, binaries []string) (
 	arch := strings.TrimSpace(string(archOut))
 
 	// TODO: Cache this output based on the .changes file. dose-ceve takes quite a while.
+	log.Printf("CMD EXEC: dose-ceve" + "--verbose" + "--deb-native-arch=" + arch + "-T" + "debsrc" +"-r" + strings.Join(binaries, ",") + "-G" + "pkg")
+
 	ceve := exec.Command(
 		"dose-ceve",
+		"--verbose",
 		"--deb-native-arch="+arch,
 		"-T", "debsrc",
 		"-r", strings.Join(binaries, ","),
