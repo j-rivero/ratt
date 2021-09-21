@@ -313,7 +313,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Printf("DEBUG :: debs " + debs + " :: src " + src)
+	log.Printf("DEBUG - debs")
+	fmt.Printf("%#v\n", debs)
+	log.Printf("DEBUG - src")
+	fmt.Printf("%#v\n", src)
 
 	builder := &sbuild{
 		dist:      *sbuildDist,
