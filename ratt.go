@@ -315,8 +315,8 @@ func main() {
 
 	log.Printf("DEBUG - debs")
 	fmt.Printf("%#v\n", debs)
-	log.Printf("DEBUG - src")
-	fmt.Printf("%#v\n", src)
+	log.Printf("DEBUG - rebuild")
+	fmt.Printf("%#v\n", rebuild)
 
 	builder := &sbuild{
 		dist:      *sbuildDist,
