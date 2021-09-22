@@ -331,6 +331,8 @@ func main() {
 		newest := versions[0]
 		log.Printf("Building package %d of %d: %s \n", cnt, len(rebuild), src)
 		cnt++
+		log.Printf("DEBUG - src")
+		fmt.Printf("%#v\n", src)
 		result := builder.build(src, &newest)
 		if result.err != nil {
 			log.Printf("building %s failed: %v\n", src, result.err)
