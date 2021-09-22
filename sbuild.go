@@ -33,6 +33,9 @@ func (s *sbuild) build(sourcePackage string, version *version.Version) *buildRes
 	for _, filename := range s.extraDebs {
 		args = append(args, fmt.Sprintf("--extra-package=%s", filename))
 	}
+	log.Printf("DEBUG - sbuild args")
+	fmt.Printf("%#v\n", args)
+
 	cmd := exec.Command("sbuild", args...)
 	if s.dryRun {
 		log.Printf("  commandline: %v\n", cmd.Args)
