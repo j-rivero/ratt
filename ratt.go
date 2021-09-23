@@ -355,6 +355,11 @@ func main() {
 	// fmt.Printf("%#v\n", debs)
 	// log.Printf("DEBUG - rebuild")
 	// fmt.Printf("%#v\n", rebuild)
+	log.Printf("Packages to rebuild")
+	for pkg, version := range rebuild {
+	    fmt.Print(pkg + " ")
+	    fmt.Println(version.String())
+	}
 
 	builder := &sbuild{
 		dist:      *sbuildDist,
