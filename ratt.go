@@ -149,9 +149,6 @@ func reverseBuildDeps(packagesPaths, sourcesPaths []string, binaries []string) (
 	}
 	arch := strings.TrimSpace(string(archOut))
 
-	// TODO: Cache this output based on the .changes file. dose-ceve takes quite a while.
-	log.Printf("DOSE-CEVE EXEC: dose-ceve " + "--verbose " + "--deb-native-arch=" + arch + " -T" + "debsrc" +" -r" + strings.Join(binaries, ",") + " -G" + "pkg")
-
 	ceve := exec.Command(
 		"dose-ceve",
 		"--verbose",
@@ -353,10 +350,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Printf("DEBUG - debs")
-	fmt.Printf("%#v\n", debs)
-	log.Printf("DEBUG - rebuild")
-	fmt.Printf("%#v\n", rebuild)
+	// Debug
+	// log.Printf("DEBUG - debs")
+	// fmt.Printf("%#v\n", debs)
+	// log.Printf("DEBUG - rebuild")
+	// fmt.Printf("%#v\n", rebuild)
 
 	builder := &sbuild{
 		dist:      *sbuildDist,
@@ -371,8 +369,8 @@ func main() {
 		newest := versions[0]
 		log.Printf("Building package %d of %d: %s \n", cnt, len(rebuild), src)
 		cnt++
-		log.Printf("DEBUG - src")
-		fmt.Printf("%#v\n", src)
+		// log.Printf("DEBUG - src")
+		// fmt.Printf("%#v\n", src)
 		result := builder.build(src, &newest)
 		if result.err != nil {
 			log.Printf("building %s failed: %v\n", src, result.err)
